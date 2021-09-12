@@ -17,7 +17,6 @@ export default function Dashboard() {
     } catch {
       setError('Failed to log out')
     }
-
   }
 
   return (
@@ -29,9 +28,9 @@ export default function Dashboard() {
           <strong>Email: </strong>{currentUser && currentUser.email}
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
         </Card.Body>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>Log Out</Button>
-      </div>
+        <div className="w-100 text-center mt-2">
+          <Button variant="link" onClick={handleLogout}>Log Out</Button>
+        </div>
       </Card>
     </div>
   )

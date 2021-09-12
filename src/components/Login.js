@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const { login, currentUser, logout } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -26,9 +26,21 @@ export default function Login() {
     setLoading(false)
   }
 
+  async function handleLogout() {
+    setError('')
+
+    try {
+      await logout()
+      history.push('/login')
+    } catch {
+      setError('Failed to log out')
+    }
+  }
+
   return (
     <>
       <Card>
+        {currentUser && currentUser.email}
         <Card.Body>
           <h2 className="text-center mb-3">Login</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -53,6 +65,7 @@ export default function Login() {
         Don't have an account yet ? 
           <Link to="/signup"> Sign Up</Link>
       </div>
+      <Button variant="link" onClick={handleLogout}>Log Out</Button>
     </>
   )
 }
