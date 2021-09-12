@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';
+import UpdateProfile from './UpdateProfile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <AuthProvider>
               <Switch>
                 <Route exact path="/" component={Dashboard} />
+                <Route path="/update-profile" component={UpdateProfile} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot-password" component={ForgotPassword} />
