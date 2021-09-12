@@ -21,24 +21,18 @@ export default function Dashboard() {
   }
 
   return (
-    <>
-      { currentUser ?
-        <div>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Dashboard</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <strong>Email: </strong>{currentUser && currentUser.email}
-              <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
-            </Card.Body>
-          <div className="w-100 text-center mt-2">
-            <Button variant="link" onClick={handleLogout}>Log Out</Button>
-          </div>
-          </Card>
-        </div>
-        :
-        <Redirect to="/login"/>
-      }
-    </>
+    <div>
+      <Card>
+        <Card.Body>
+          <h2 className="text-center mb-4">Dashboard</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <strong>Email: </strong>{currentUser && currentUser.email}
+          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
+        </Card.Body>
+      <div className="w-100 text-center mt-2">
+        <Button variant="link" onClick={handleLogout}>Log Out</Button>
+      </div>
+      </Card>
+    </div>
   )
 }
