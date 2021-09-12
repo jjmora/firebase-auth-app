@@ -3,11 +3,10 @@ import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
-export default function SignUp() {
+export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const passwordConfirmationRef = useRef()
-  const { signup, currentUser, logout } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -15,17 +14,13 @@ export default function SignUp() {
   async function handleSubmit(e){
     e.preventDefault()
 
-    if(passwordRef.current.value !== passwordConfirmationRef.current.value){
-      return setError('Password do not match')
-    }
-
     try {
       setError("")
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current.value, passwordRef.current.value)
       history.push("/") //redirection to Dashbord after Login
     } catch {
-      setError('Failed to create un account')
+      setError('Failed to Log In')
     }
 
     setLoading(false)
@@ -34,9 +29,8 @@ export default function SignUp() {
   return (
     <>
       <Card>
-        {currentUser && currentUser.email }
         <Card.Body>
-          <h2 className="text-center mb-3">Sign Up</h2>
+          <h2 className="text-center mb-3">Login</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -47,17 +41,17 @@ export default function SignUp() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Form.Group id="password-confirmation">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmationRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100 mt-3" type="submit">Sign Up</Button>
+            <Button disabled={loading} className="w-100 mt-3" type="submit">Log In</Button>
           </Form>
+
+          <div className="w-100 text-center mt-3">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account ? 
-          <Link to="/login">Log In</Link>
+        Don't have an account yet ? 
+          <Link to="/signup"> Sign Up</Link>
       </div>
     </>
   )
