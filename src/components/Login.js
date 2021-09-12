@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login, currentUser, logout } = useAuth()
+  const { login, logout } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -40,7 +40,6 @@ export default function Login() {
   return (
     <>
       <Card>
-        {currentUser && currentUser.email}
         <Card.Body>
           <h2 className="text-center mb-3">Login</h2>
           {error && <Alert variant="danger">{error}</Alert>}

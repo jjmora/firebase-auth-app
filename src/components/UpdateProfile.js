@@ -14,13 +14,13 @@ export default function UpdateProfile() {
 
   function handleSubmit(e){
     e.preventDefault()
-
+    
     if(passwordRef.current.value !== passwordConfirmationRef.current.value){
       return setError('Password do not match')
     }
 
     const promises = []
-    setLoading(false)
+    setLoading(true)
     setError('')
 
     if(emailRef.current.value !== currentUser.email){
